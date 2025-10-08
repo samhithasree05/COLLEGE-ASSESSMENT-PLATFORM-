@@ -1,0 +1,133 @@
+ <!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>College Assessment Platform</title>
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <h1>College Assessment Platform</h1>
+    <div>
+      <span id="userLabel" class="muted">Not logged in</span>
+      <button class="btn ghost" id="logoutBtn" style="margin-left:10px;display:none">Logout</button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Login View -->
+    <section id="loginView" class="card">
+      <h2>Welcome — choose role to continue</h2>
+      <p class="muted">A sample page for assessment platforms. Data is stored in your browser (localStorage).</p>
+      <div style="display:flex;gap:12px;margin-top:12px">
+        <div style="flex:1">
+          <h3>Student</h3>
+          <p class="muted">Enter your name & roll number to start an exam.</p>
+          <form id="studentForm">
+            <input id="studentName" placeholder="Full name" required />
+            <input id="studentRoll" placeholder="Roll number" style="margin-top:8px" required />
+            <div id="studentFormError" class="inlineMsg"></div>
+            <div style="margin-top:8px"><button class="btn" type="submit">Continue as Student</button></div>
+          </form>
+        </div>
+        <div style="width:1px;background:linear-gradient(#eee,#fafafa)"></div>
+        <div style="flex:1">
+          <h3>Instructor</h3>
+          <p class="muted">Create a quick MCQ exam and publish it to students.</p>
+          <form id="instrForm">
+            <input id="instrName" placeholder="Instructor name" required />
+            <div id="instrFormError" class="inlineMsg"></div>
+            <div style="margin-top:8px"><button class="btn" type="submit">Continue as Instructor</button></div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Dashboard -->
+    <section id="dashboardView" style="display:none">
+      <div class="grid cols-2" style="gap:20px">
+        <div>
+          <div class="card">
+            <h2 id="dashWelcome">Hello</h2>
+            <p class="muted">Available exams and quick actions.</p>
+            <div style="margin-top:12px">
+              <h3>Available Exams</h3>
+              <div id="examList" class="exam-list" style="margin-top:8px"></div>
+            </div>
+          </div>
+
+          <div class="card" style="margin-top:16px">
+            <h3>Student Attempts</h3>
+            <div id="attemptsList" class="exam-list" style="margin-top:8px"></div>
+          </div>
+        </div>
+
+        <aside>
+          <div class="card">
+            <h3 id="sideTitle">Instructor Panel</h3>
+            <p class="muted">Create & publish a new MCQ exam quickly.</p>
+            <form id="createExamForm" style="margin-top:8px">
+              <input id="examTitle" placeholder="Exam title" required />
+              <div style="display:flex;gap:8px;margin-top:8px">
+                <input id="examDuration" placeholder="Duration (minutes)" required />
+                <select id="examPrivacy" title="privacy">
+                  <option value="public">Public</option>
+                  <option value="private">Private (share code)</option>
+                </select>
+              </div>
+              <textarea id="examQuestions" placeholder='Add questions as JSON array.' rows="6" style="margin-top:8px"></textarea>
+              <div id="examFormError" class="inlineMsg"></div>
+              <div style="margin-top:8px;display:flex;gap:8px">
+                <button class="btn" type="submit">Create & Publish</button>
+                <button class="btn ghost" id="loadSample">Load sample</button>
+              </div>
+            </form>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Exam View -->
+    <section id="examView" style="display:none;margin-top:20px">
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div>
+            <h2 id="examTitleH">Exam</h2>
+            <div class="muted small" id="examMeta"></div>
+          </div>
+          <div class="center">
+            <div class="muted small">Time left:</div>
+            <div class="timer" id="timeLeft">00:00</div>
+            <button class="btn ghost" id="saveProgress" style="margin-left:12px">Save</button>
+            <button class="btn danger" id="submitExam" style="margin-left:8px">Submit</button>
+          </div>
+        </div>
+
+        <div style="margin-top:12px" id="questionsContainer"></div>
+      </div>
+    </section>
+
+    <!-- Results -->
+    <section id="resultsView" style="display:none;margin-top:20px">
+      <div class="card results">
+        <div>
+          <h2>Results</h2>
+          <div id="scoreBlock" class="muted small"></div>
+          <div id="detailedResults" style="margin-top:12px"></div>
+        </div>
+        <aside class="card">
+          <h4>Attempt Summary</h4>
+          <div id="summaryBox" class="muted small"></div>
+          <div style="margin-top:12px"><button class="btn" id="backToDash">Back to Dashboard</button></div>
+        </aside>
+      </div>
+    </section>
+
+  </main>
+
+<script src="script.js"></script>
+</body>
+</html>
